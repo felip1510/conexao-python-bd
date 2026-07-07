@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: metalsul_industrial
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: metalsul_industrial
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3307"
+    volumes:
+      - dados_mysql:/var/lib/mysql
+      - ./scripts:/docker-entrypoint-initdb.d
+    networks:
+      - rede_techfactory
+
+volumes:
+  dados_mysql:
+
+networks:
+  rede_techfactory:
+    driver: bridge
